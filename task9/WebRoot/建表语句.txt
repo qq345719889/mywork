@@ -1,0 +1,46 @@
+CREATE TABLE `vip` (
+`vipId` int(11) NOT NULL auto_increment,
+`joinTime` date default NULL,
+`name` varchar(20) default NULL,
+`age` int(11) default NULL,
+`profession` varchar(20) default NULL,
+PRIMARY KEY (`vipId`)
+) ENGINE=InnoDB DEFAULT CHARSET=gb2312;
+
+
+CREATE TABLE `commodity` (
+`commodityId` int(11) NOT NULL auto_increment,
+`commodityName` varchar(30) default NULL,
+`price` decimal(10,2) default NULL,
+`agio` decimal(4,3) default NULL,
+PRIMARY KEY (`commodityId`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=gb2312;
+
+
+
+CREATE TABLE `consume` (
+`consumeId` int(11) NOT NULL auto_increment,
+`vipid` int(11) default NULL,
+`name` varchar(20) default NULL,
+`commodityId` int(11) default NULL,
+`commodityName` varchar(30) default NULL,
+`price` decimal(10,2) default NULL,
+`practicePrice` decimal(10,2) default NULL,
+PRIMARY KEY (`consumeId`),
+KEY `vipid` (`vipid`),
+KEY `commodityId` (`commodityId`),
+CONSTRAINT `consume_ibfk_2` FOREIGN KEY (`commodityId`) REFERENCES
+`commodity` (`commodityId`),
+CONSTRAINT `consume_ibfk_1` FOREIGN KEY (`vipid`) REFERENCES `vip`
+(`vipId`)
+) ENGINE=InnoDB DEFAULT CHARSET=gb2312;
+
+
+
+
+CREATE TABLE `user` (
+`username` varchar(20) NOT NULL default '',
+`password` varchar(20) default NULL,
+`quanxian` int(11) default NULL,
+PRIMARY KEY (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=gb2312;

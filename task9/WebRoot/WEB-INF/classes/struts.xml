@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<!-- 配置web默认编码集 -->
+	<constant name="struts.i18n.encoding" value="utf-8"></constant>
+	<!-- 默认struts2的请求的后缀是.action ,加入后可配置.action/.do -->
+	<constant name="struts.action.extension" value="do,action"></constant>
+	<package name="test" namespace="/new" extends=" struts-default ">
+		<action name="login" class="com.qiuzz.action.LoginAction"
+			method="doLogin">
+			<result name="success">/dologin/welcome.jsp</result>
+			<result name="fail">/dologin/error.jsp</result>
+			<result name="noUser">/dologin/error.jsp</result>
+		</action>
+		<action name="reg" class="com.qiuzz.action.LoginAction" method="doReg">
+			<result name="success">/doreg/info.jsp</result>
+			<result name="fail">/doreg/error.jsp</result>
+		</action>
+		<action name="addgoods" class="com.qiuzz.action.GoodsAction"
+			method="addGoods">
+			<result name="success">/goodsinfo/addsuccess.jsp</result>
+		</action>
+		<action name="querygoods" class="com.qiuzz.action.GoodsAction"
+			method="queryGoods">
+			<result name="success">/goodsinfo/querygoods.jsp</result>
+		</action>
+		<action name="tobevip" class="com.qiuzz.action.VipDoAction"
+			method="toBeVip">
+			<result name="success">/loginvip/bevipsuccess.jsp</result>
+		</action>
+		<action name="tovipbuy" class="com.qiuzz.action.VipDoAction"
+			method="toVipBuy">
+			<result name="success">/loginvip/tovipbuy.jsp</result>
+		</action>
+		<action name="vipbuy" class="com.qiuzz.action.VipDoAction"
+			method="vipBuy">
+			<result name="success">/loginvip/buysuccess.jsp</result>
+		</action>
+		<action name="vipidquery" class="com.qiuzz.action.VipDoAction"
+			method="vipIdQuery">
+			<result name="success">/loginvip/tofindvipinfo.jsp</result>
+		</action>
+		<action name="vipinfoquery" class="com.qiuzz.action.VipDoAction"
+			method="vipInfoQuery">
+			<result name="success">/loginvip/findvipinfo.jsp</result>
+		</action>
+		<action name="queryuser" class="com.qiuzz.action.MgrSysAction"
+			method="queryUser">
+			<result name="success">/domgr/mgr.jsp</result>
+		</action>
+		<action name="deleteuser" class="com.qiuzz.action.MgrSysAction"
+			method="deleteUser">
+			<result name="success">/domgr/mgr.jsp</result>
+			<result name="fail">/domgr/mgr.jsp</result>
+		</action>
+				<action name="tobemgr" class="com.qiuzz.action.MgrSysAction"
+			method="toBeMgr">
+			<result name="success">/domgr/quansuccess.jsp</result>
+			<result name="fail">/domgr/quanfail.jsp</result>
+		</action>
+	</package>
+</struts>    
+ 

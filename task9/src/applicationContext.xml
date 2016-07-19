@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+
+
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+		<property name="url"
+			value="jdbc:mysql://localhost:3306/task_vshop?useUnicode=true&amp;characterEncoding=utf-8">
+		</property>
+		<property name="username" value="root"></property>
+		<property name="password" value="123456"></property>
+	</bean>
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.MySQLDialect
+				</prop>
+			</props>
+		</property>
+		<property name="mappingResources">
+			<list>
+				<value>com/qiuzz/property/Consume.hbm.xml</value>
+				<value>com/qiuzz/property/Vip.hbm.xml</value>
+				<value>com/qiuzz/property/User.hbm.xml</value>
+				<value>com/qiuzz/property/Commodity.hbm.xml</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="loginimpl" class="com.qiuzz.dao.impl.LoginImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="loginserviceimpl" class="com.qiuzz.service.impl.LoginServiceImpl">
+		<property name="loginimpl" ref="loginimpl"></property>
+	</bean>
+	<bean id="loginaction" class="com.qiuzz.action.LoginAction">
+		<property name="loginserviceimpl" ref="loginserviceimpl"></property>
+	</bean>
+	<bean id="goodsimpl" class="com.qiuzz.dao.impl.GoodsImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="goodsservice" class="com.qiuzz.service.impl.GoodsServiceImpl">
+		<property name="goodsimpl" ref="goodsimpl"></property>
+	</bean>
+	<bean id="goodsaction" class="com.qiuzz.action.GoodsAction">
+		<property name="goodsservice" ref="goodsservice"></property>
+	</bean>
+	<bean id="vipdoimpl" class="com.qiuzz.dao.impl.VipDoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="vipdoservice" class="com.qiuzz.service.impl.VipDoServiceImpl">
+		<property name="vipdoimpl" ref="vipdoimpl"></property>
+	</bean>
+	<bean id="vipdoaction" class="com.qiuzz.action.VipDoAction">
+		<property name="vipdoservice" ref="vipdoservice"></property>
+		<property name="goodsservice" ref="goodsservice"></property>
+	</bean>
+	<bean id="mgrsysimpl" class="com.qiuzz.dao.impl.MgrSysImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="mgrsysserviceimpl" class="com.qiuzz.service.impl.MgrSysServiceImpl">
+		<property name="mgrsysimpl" ref="mgrsysimpl"></property>
+	</bean>
+	<bean id="mgrsysaction" class="com.qiuzz.action.MgrSysAction">
+		<property name="mgrsysserviceimpl" ref="mgrsysserviceimpl"></property>
+	</bean>
+</beans>
